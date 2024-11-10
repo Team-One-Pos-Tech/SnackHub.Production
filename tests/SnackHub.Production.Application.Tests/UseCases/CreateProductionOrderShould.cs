@@ -48,8 +48,7 @@ internal class CreateProductionOrderShould
         {
             Items = new List<ProductionOrderItemRequest>
             {
-                new ProductionOrderItemRequest
-                {
+                new() {
                     Id = Guid.NewGuid(),
                     ProductName = "X-Bacon",
                     Quantity = 3
