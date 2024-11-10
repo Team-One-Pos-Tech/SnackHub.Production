@@ -1,18 +1,19 @@
 using SnackHub.Domain.Contracts;
+using SnackHub.Domain.Entities;
 using SnackHub.Domain.ValueObjects;
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class CreateProductionOrder(IOrderRepository _orderRepository,
+public class CreateProductionOrder(
     IProductionOrderRepository _productionOrderRepository) : ICreateProductionOrder
 {
 
-    public async Task<CreateKitchenOrderResponse> Execute(CreateKitchenOrderRequest request)
+    public async Task<CreateKitchenOrderResponse> Execute(CreateProductionOrderRequest request)
     {
         var response = new CreateKitchenOrderResponse();
-        var order = await _orderRepository.GetByIdAsync(request.OrderId);
+        var order = new Order(default, []);
 
         if (order is null)
         {

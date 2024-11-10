@@ -4,5 +4,5 @@ namespace SnackHub.Production.Application.Contracts;
 
 public interface ICreateProductionOrder
 {
-    Task<CreateKitchenOrderResponse> Execute(CreateKitchenOrderRequest request);
+    Task<CreateKitchenOrderResponse> Execute(CreateProductionOrderRequest request);
 }
