@@ -4,18 +4,11 @@ using SnackHub.Production.Application.Models;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class ListKitchenOrderUseCase : IListKitchenOrderUseCase
+public class ListProductionOrders(IProductionOrderRepository productionOrderRepository) : IListProductionOrders
 {
-    private readonly IProductionOrderRepository _kitchenOrderRepository;
-
-    public ListKitchenOrderUseCase(IProductionOrderRepository kitchenOrderRepository)
+    public async Task<IEnumerable<KitchenOrderResponse>> Get()
     {
-        _kitchenOrderRepository = kitchenOrderRepository;
-    }
-
-    public async Task<IEnumerable<KitchenOrderResponse>> Execute()
-    {
-        var kitchenRequests = await _kitchenOrderRepository.ListCurrentAsync();
+        var kitchenRequests = await productionOrderRepository.ListCurrentAsync();
 
         return kitchenRequests.Select(o => new KitchenOrderResponse
         {
