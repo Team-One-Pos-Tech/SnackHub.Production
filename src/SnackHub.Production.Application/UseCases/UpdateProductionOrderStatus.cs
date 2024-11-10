@@ -16,7 +16,7 @@ public class UpdateProductionOrderStatus(IProductionOrderRepository productionOr
 
         if (productionOrder is null)
         {
-            response.AddNotification(nameof(orderStatusRequest.OrderId), "Kitchen request for order not found!");
+            response.AddNotification(nameof(orderStatusRequest.OrderId), "Production order not found!");
             return response;
         }
 

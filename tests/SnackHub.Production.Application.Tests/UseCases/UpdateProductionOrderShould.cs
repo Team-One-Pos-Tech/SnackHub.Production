@@ -54,4 +54,34 @@ internal class UpdateProductionOrdersShould
 
         #endregion
     }
+
+    [Test]
+    public async Task Validate_Production_Order_When_Does_Not_Exists()
+    {
+        #region Arrange
+
+        var request = new UpdateProductionOrderStatus
+        {
+            OrderId = Guid.NewGuid()
+        };
+
+        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.OrderId));
+
+        #endregion
+
+        #region Act
+
+        var response = await updateProductionOrders.Execute(request);
+
+        #endregion
+
+        #region Assert
+
+        response.IsValid.Should().BeFalse();
+
+        response.Notifications.First().Key.Should().Be(nameof(request.OrderId));
+        response.Notifications.First().Message.Should().Be("Production order not found!");
+
+        #endregion
+    }
 }
