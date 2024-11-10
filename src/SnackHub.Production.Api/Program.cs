@@ -8,7 +8,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMassTransit(builder.Configuration);
+builder
+    .Services
+    .AddDatabaseContext(builder.Configuration)
+    .AddRepositories()
+    .AddMassTransit(builder.Configuration);
 
 var app = builder.Build();
 

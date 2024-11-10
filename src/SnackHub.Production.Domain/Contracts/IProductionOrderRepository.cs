@@ -1,11 +1,11 @@
-using SnackHub.Domain.Entities;
+using SnackHub.Production.Domain.Entities;
 
-namespace SnackHub.Domain.Contracts;
+namespace SnackHub.Production.Domain.Contracts;
 
 public interface IProductionOrderRepository
 {
-    Task AddAsync(ProductionOrder kitchenOrder);
-    Task EditAsync(ProductionOrder kitchenOrder);
+    Task AddAsync(ProductionOrder productionOrder);
+    Task EditAsync(ProductionOrder productionOrder);
     Task<ProductionOrder?> GetByOderIdAsync(Guid orderId);
     Task<IEnumerable<ProductionOrder>> ListAllAsync();
     Task<IEnumerable<ProductionOrder>> ListCurrentAsync();

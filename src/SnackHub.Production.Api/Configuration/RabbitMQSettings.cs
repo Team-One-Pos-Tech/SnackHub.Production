@@ -1,4 +1,4 @@
-namespace SnackHub.OrderService.Api.Configuration;
+namespace SnackHub.Production.Api.Configuration;
 
 public record RabbitMQSettings
 {

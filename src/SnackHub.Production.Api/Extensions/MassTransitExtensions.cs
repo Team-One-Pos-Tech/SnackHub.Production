@@ -1,7 +1,7 @@
-using SnackHub.OrderService.Api.Configuration;
 using SnackHub.Production.Application.EventConsumers.Product;
 
 using MassTransit;
+using SnackHub.Production.Api.Configuration;
 
 namespace SnackHub.Production.Api.Extensions;
 
@@ -13,12 +13,6 @@ public static class MassTransitExtensions
         
         serviceCollection.AddMassTransit(busConfigurator =>
         {
-            // busConfigurator.AddConsumer<PaymentApprovedConsumer>();
-            // busConfigurator.AddConsumer<PaymentRejectedConsumer>();
-            //
-            // busConfigurator.AddConsumer<ProductionOrderAcceptedConsumer>();
-            // busConfigurator.AddConsumer<ProductionOrderCompletedConsumer>();
-
             busConfigurator.AddConsumer<ProductCreatedConsumer>();
             busConfigurator.AddConsumer<ProductUpdatedConsumer>();
             busConfigurator.AddConsumer<ProductDeletedConsumer>();
@@ -26,10 +20,13 @@ public static class MassTransitExtensions
             busConfigurator.SetKebabCaseEndpointNameFormatter();
             busConfigurator.UsingRabbitMq((context, configurator) =>
             {
-                // configurator.ReceiveEndpoint(settings.Host, queueConfigurator =>
-                // {
-                //     queueConfigurator.AutoDelete = true;
-                // });
+                // Shared messages - those will be in a replicated queue at RabbitMQ
+                configurator.ReceiveEndpoint("production-service", rabbitMqReceiveEndpointConfigurator =>
+                {
+                    rabbitMqReceiveEndpointConfigurator.ConfigureConsumer<ProductCreatedConsumer>(context);
+                    rabbitMqReceiveEndpointConfigurator.ConfigureConsumer<ProductUpdatedConsumer>(context);
+                    rabbitMqReceiveEndpointConfigurator.ConfigureConsumer<ProductDeletedConsumer>(context);
+                });
                 
                 configurator.Host(settings.Host, "/",  rabbitMqHostConfigurator =>
                 {

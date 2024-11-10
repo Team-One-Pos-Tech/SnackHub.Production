@@ -1,4 +1,4 @@
-﻿namespace SnackHub.Domain.Base
+﻿namespace SnackHub.Production.Domain.Base
 {
 
     // How do work with IAggregateRoot from DDD?

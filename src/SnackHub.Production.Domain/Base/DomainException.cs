@@ -1,4 +1,4 @@
-namespace SnackHub.Domain.Base;
+namespace SnackHub.Production.Domain.Base;
 
 public class DomainException : Exception
 {

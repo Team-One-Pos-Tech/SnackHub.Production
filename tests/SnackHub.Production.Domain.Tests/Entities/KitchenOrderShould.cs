@@ -1,10 +1,9 @@
 using FluentAssertions;
 using NUnit.Framework;
-using SnackHub.Domain.Entities;
-using SnackHub.Domain.ValueObjects;
-
-using KitchenOrderFactory = SnackHub.Domain.Entities.ProductionOrder.Factory;
-using KitchenOrderItemFactory = SnackHub.Domain.ValueObjects.ProductionOrderItem.Factory;
+using SnackHub.Production.Domain.Entities;
+using SnackHub.Production.Domain.ValueObjects;
+using KitchenOrderFactory = SnackHub.Production.Domain.Entities.ProductionOrder.Factory;
+using KitchenOrderItemFactory = SnackHub.Production.Domain.ValueObjects.ProductionOrderItem.Factory;
 
 namespace SnackHub.Domain.Tests.Entities;
 

@@ -1,4 +1,6 @@
-﻿public abstract class ValueObject
+﻿namespace SnackHub.Production.Domain.Base;
+
+public abstract class ValueObject
 {
     protected static bool EqualOperator(ValueObject left, ValueObject right)
     {

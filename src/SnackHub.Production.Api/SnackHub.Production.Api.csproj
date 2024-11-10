@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.1" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SnackHub.Production.Application\SnackHub.Production.Application.csproj" />
+    <ProjectReference Include="..\SnackHub.Production.Infra\SnackHub.Production.Infra.csproj" />
   </ItemGroup>
 
 </Project>

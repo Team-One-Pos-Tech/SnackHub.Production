@@ -1,4 +1,4 @@
-namespace SnackHub.Domain.ValueObjects;
+namespace SnackHub.Production.Domain.ValueObjects;
 
 public enum ProductionOrderStatus
 {
