@@ -4,5 +4,5 @@ namespace SnackHub.Production.Application.Contracts;
 
 public interface IListProductionOrders
 {
-    Task<IEnumerable<KitchenOrderResponse>> Get();
+    Task<IEnumerable<ProductionOrderResponse>> Get();
 }

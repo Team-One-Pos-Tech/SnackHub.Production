@@ -6,11 +6,11 @@ namespace SnackHub.Production.Application.UseCases;
 
 public class ListProductionOrders(IProductionOrderRepository productionOrderRepository) : IListProductionOrders
 {
-    public async Task<IEnumerable<KitchenOrderResponse>> Get()
+    public async Task<IEnumerable<ProductionOrderResponse>> Get()
     {
         var kitchenRequests = await productionOrderRepository.ListCurrentAsync();
 
-        return kitchenRequests.Select(o => new KitchenOrderResponse
+        return kitchenRequests.Select(o => new ProductionOrderResponse
         {
             OrderId = o.OrderId,
             Items = o.Items.Select(i => (i.ProductName, i.Quantity)).ToList(),

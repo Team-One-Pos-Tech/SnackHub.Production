@@ -2,4 +2,4 @@ using Flunt.Notifications;
 
 namespace SnackHub.Production.Application.Models.Responses;
 
-public class CreateKitchenOrderResponse : Notifiable<Notification>;
+public class CreateProductionOrderResponse : Notifiable<Notification>;

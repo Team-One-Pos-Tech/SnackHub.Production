@@ -9,14 +9,14 @@ namespace SnackHub.Production.Application.UseCases;
 public class UpdateProductionOrderStatus(IProductionOrderRepository productionOrderRepository) : IUpdateKitchenOrderStatusUseCase
 {
 
-    public async Task<UpdateKitchenOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
+    public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
     {
         var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
 
         if(!IsRequestValid(
             productionOrder, 
             orderStatusRequest, 
-            out UpdateKitchenOrderStatusResponse response))
+            out UpdateProductionOrderStatusResponse response))
         {
             return response;
         }
@@ -31,9 +31,9 @@ public class UpdateProductionOrderStatus(IProductionOrderRepository productionOr
     public static bool IsRequestValid(
         ProductionOrder? productionOrder,
         Models.Requests.UpdateProductionOrderStatus orderStatusRequest,
-        out UpdateKitchenOrderStatusResponse response)
+        out UpdateProductionOrderStatusResponse response)
     {
-        response = new UpdateKitchenOrderStatusResponse();
+        response = new UpdateProductionOrderStatusResponse();
 
         if (productionOrder is null)
         {

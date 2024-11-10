@@ -11,9 +11,9 @@ public class CreateProductionOrder(
     IProductionOrderRepository _productionOrderRepository) : ICreateProductionOrder
 {
 
-    public async Task<CreateKitchenOrderResponse> Execute(CreateProductionOrderRequest request)
+    public async Task<CreateProductionOrderResponse> Execute(CreateProductionOrderRequest request)
     {
-        var response = new CreateKitchenOrderResponse();
+        var response = new CreateProductionOrderResponse();
 
         List<ProductionOrderItem> items = MapProductionOrderItems(request);
 
