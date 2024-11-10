@@ -3,6 +3,7 @@ using Moq;
 using SnackHub.Domain.Contracts;
 using SnackHub.Domain.Entities;
 using SnackHub.Production.Application.Models;
+using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.UseCases;
 
 namespace SnackHub.Application.Tests.UseCases;

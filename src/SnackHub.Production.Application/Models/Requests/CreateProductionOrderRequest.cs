@@ -1,6 +1,4 @@
-using SnackHub.Application.Tests.UseCases;
-
-namespace SnackHub.Production.Application.Models;
+namespace SnackHub.Production.Application.Models.Requests;
 
 public record CreateProductionOrderRequest
 {

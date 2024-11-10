@@ -1,4 +1,4 @@
-namespace SnackHub.Production.Application.Models;
+namespace SnackHub.Production.Application.Models.Requests;
 
 public class UpdateKitchenOrderStatusRequest
 {

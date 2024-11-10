@@ -1,5 +1,5 @@
 using Flunt.Notifications;
 
-namespace SnackHub.Production.Application.Models;
+namespace SnackHub.Production.Application.Models.Responses;
 
 public class CreateKitchenOrderResponse : Notifiable<Notification>;

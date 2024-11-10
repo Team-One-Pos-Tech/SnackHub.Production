@@ -5,7 +5,6 @@ namespace SnackHub.Domain.Entities;
 
 public class ProductionOrder : Entity<Guid>, IAggregateRoot
 {
-    protected ProductionOrder( ): base(Guid.NewGuid()) { }
     
     public ProductionOrder(Guid orderId, IReadOnlyCollection<ProductionOrderItem> items) 
         : this(Guid.NewGuid(), orderId, items, KitchenOrderStatus.Received)
