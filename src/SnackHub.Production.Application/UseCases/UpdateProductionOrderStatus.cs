@@ -5,16 +5,16 @@ using SnackHub.Production.Application.Models.Responses;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class UpdateKitchenOrderStatusUseCase : IUpdateKitchenOrderStatusUseCase
+public class UpdateProductionOrderStatus : IUpdateKitchenOrderStatusUseCase
 {
     private readonly IProductionOrderRepository _kitchenOrderRepository;
 
-    public UpdateKitchenOrderStatusUseCase(IProductionOrderRepository kitchenOrderRepository)
+    public UpdateProductionOrderStatus(IProductionOrderRepository kitchenOrderRepository)
     {
         _kitchenOrderRepository = kitchenOrderRepository;
     }
 
-    public async Task<UpdateKitchenOrderStatusResponse> Execute(UpdateKitchenOrderStatusRequest orderStatusRequest)
+    public async Task<UpdateKitchenOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
     {
         var response = new UpdateKitchenOrderStatusResponse();
 

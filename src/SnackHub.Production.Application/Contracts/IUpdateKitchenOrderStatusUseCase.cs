@@ -5,5 +5,5 @@ namespace SnackHub.Production.Application.Contracts;
 
 public interface IUpdateKitchenOrderStatusUseCase
 {
-    Task<UpdateKitchenOrderStatusResponse> Execute(UpdateKitchenOrderStatusRequest orderStatusRequest);
+    Task<UpdateKitchenOrderStatusResponse> Execute(UpdateProductionOrderStatus orderStatusRequest);
 }
