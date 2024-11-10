@@ -13,11 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DAB6F12C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Domain", "src\SnackHub.Production.Domain\SnackHub.Production.Domain.csproj", "{31071CEC-4A52-48A5-809A-AD624286A87E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Application.Tests", "tests\SnackHub.Production.Application.Tests\SnackHub.Application.Tests.csproj", "{A3A40DA6-D32A-4942-BE1E-E72A7F915F08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Application.Tests", "tests\SnackHub.Production.Application.Tests\SnackHub.Production.Application.Tests.csproj", "{A3A40DA6-D32A-4942-BE1E-E72A7F915F08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Domain.Tests", "tests\SnackHub.Production.Domain.Tests\SnackHub.Domain.Tests.csproj", "{B56933DC-CC46-414D-9BD8-02846E41118A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Domain.Tests", "tests\SnackHub.Production.Domain.Tests\SnackHub.Production.Domain.Tests.csproj", "{B56933DC-CC46-414D-9BD8-02846E41118A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnackHub.Production.Behavior.Tests", "tests\SnackHub.Production.Behavior.Tests\SnackHub.Production.Behavior.Tests.csproj", "{9CC4B9D9-509B-4642-A83D-0705A24FB68A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Behavior.Tests", "tests\SnackHub.Production.Behavior.Tests\SnackHub.Production.Behavior.Tests.csproj", "{9CC4B9D9-509B-4642-A83D-0705A24FB68A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
