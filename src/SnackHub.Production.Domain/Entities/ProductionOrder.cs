@@ -7,11 +7,11 @@ public class ProductionOrder : Entity<Guid>, IAggregateRoot
 {
     
     public ProductionOrder(Guid orderId, IReadOnlyCollection<ProductionOrderItem> items) 
-        : this(Guid.NewGuid(), orderId, items, KitchenOrderStatus.Received)
+        : this(Guid.NewGuid(), orderId, items, ProductionOrderStatus.Received)
     {
     }
     
-    public ProductionOrder(Guid id, Guid orderId, IReadOnlyCollection<ProductionOrderItem> items, KitchenOrderStatus status)
+    public ProductionOrder(Guid id, Guid orderId, IReadOnlyCollection<ProductionOrderItem> items, ProductionOrderStatus status)
         : base(id)
     {
         ArgumentOutOfRangeException.ThrowIfEqual(orderId, Guid.Empty);
@@ -24,7 +24,7 @@ public class ProductionOrder : Entity<Guid>, IAggregateRoot
     
     public virtual Guid OrderId { get; private set; }
     public virtual IReadOnlyCollection<ProductionOrderItem> Items { get; private set; }
-    public virtual KitchenOrderStatus Status { get; private set; }
+    public virtual ProductionOrderStatus Status { get; private set; }
 
     public void UpdateStatus()
     {
@@ -32,9 +32,9 @@ public class ProductionOrder : Entity<Guid>, IAggregateRoot
         
         Status = Status switch
         {
-            KitchenOrderStatus.Received => KitchenOrderStatus.Preparing,
-            KitchenOrderStatus.Preparing => KitchenOrderStatus.Done,
-            KitchenOrderStatus.Done => KitchenOrderStatus.Finished,
+            ProductionOrderStatus.Received => ProductionOrderStatus.Preparing,
+            ProductionOrderStatus.Preparing => ProductionOrderStatus.Done,
+            ProductionOrderStatus.Done => ProductionOrderStatus.Finished,
             _ => Status
         };
         

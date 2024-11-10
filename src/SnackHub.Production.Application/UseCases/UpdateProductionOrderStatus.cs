@@ -12,22 +12,17 @@ public class UpdateProductionOrderStatus(IProductionOrderRepository productionOr
     {
         var response = new UpdateKitchenOrderStatusResponse();
 
-        var kitchenOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
-        if (kitchenOrder is null)
+        var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
+
+        if (productionOrder is null)
         {
             response.AddNotification(nameof(orderStatusRequest.OrderId), "Kitchen request for order not found!");
             return response;
         }
 
-        try
-        {
-            kitchenOrder.UpdateStatus();
-            await productionOrderRepository.EditAsync(kitchenOrder);
-        }
-        catch (Exception exception)
-        {
-            response.AddNotification(nameof(orderStatusRequest.OrderId), exception.Message);
-        }
+        productionOrder.UpdateStatus();
+
+        await productionOrderRepository.EditAsync(productionOrder);
 
         return response;
     }

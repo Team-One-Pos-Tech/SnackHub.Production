@@ -24,7 +24,7 @@ public class KitchenOrderShould
             .BeEquivalentTo(new
             {
                 OrderId = orderId,
-                Status = KitchenOrderStatus.Received,
+                Status = ProductionOrderStatus.Received,
                 Items = new []
                 {
                     new
@@ -54,7 +54,7 @@ public class KitchenOrderShould
 
     [Test]
     public void ShouldTransitionStatusAsExpected(
-        [ValueSource(nameof(StatusTransitions))] (KitchenOrderStatus From, KitchenOrderStatus To) transition)
+        [ValueSource(nameof(StatusTransitions))] (ProductionOrderStatus From, ProductionOrderStatus To) transition)
     {
         var kitchenOrder = new ProductionOrder(Guid.NewGuid(), Guid.NewGuid(), [], transition.From);
         
@@ -63,11 +63,11 @@ public class KitchenOrderShould
         kitchenOrder.Status.Should().Be(transition.To);
     }
   
-    private static readonly (KitchenOrderStatus From, KitchenOrderStatus To)[] StatusTransitions =
+    private static readonly (ProductionOrderStatus From, ProductionOrderStatus To)[] StatusTransitions =
     [
-        (KitchenOrderStatus.Received, KitchenOrderStatus.Preparing),
-        (KitchenOrderStatus.Preparing, KitchenOrderStatus.Done),
-        (KitchenOrderStatus.Done, KitchenOrderStatus.Finished),
-        (KitchenOrderStatus.Finished, KitchenOrderStatus.Finished)
+        (ProductionOrderStatus.Received, ProductionOrderStatus.Preparing),
+        (ProductionOrderStatus.Preparing, ProductionOrderStatus.Done),
+        (ProductionOrderStatus.Done, ProductionOrderStatus.Finished),
+        (ProductionOrderStatus.Finished, ProductionOrderStatus.Finished)
     ];
 }

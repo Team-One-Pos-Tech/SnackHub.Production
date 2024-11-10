@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using Moq;
 using SnackHub.Domain.Contracts;
+using SnackHub.Domain.Entities;
+using SnackHub.Domain.ValueObjects;
 using UpdateProductionOrderStatus = SnackHub.Production.Application.Models.Requests.UpdateProductionOrderStatus;
 
 namespace SnackHub.Application.Tests.UseCases;
@@ -19,7 +21,7 @@ internal class UpdateProductionOrdersShould
     }
 
     [Test]
-    public async Task List_Production_Orders()
+    public async Task Update_Production_Order()
     {
         #region Arrange
 
@@ -28,8 +30,10 @@ internal class UpdateProductionOrdersShould
             OrderId = Guid.NewGuid()
         };
 
+        var productionOrder = new ProductionOrder(Guid.NewGuid(), request.OrderId, [], ProductionOrderStatus.Received);
+
         productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.OrderId))
-            .ReturnsAsync(new Domain.Entities.ProductionOrder(request.OrderId, []));
+            .ReturnsAsync(productionOrder);
 
         #endregion
 
@@ -43,7 +47,10 @@ internal class UpdateProductionOrdersShould
 
         response.IsValid.Should().BeTrue();
 
-        productionOrderRepositoryMock.Verify(x => x.GetByOderIdAsync(request.OrderId), Times.Once);
+        productionOrderRepositoryMock.Verify(x => x.EditAsync(It.Is<ProductionOrder>(
+            request => request.OrderId == productionOrder.OrderId && 
+                request.Status == ProductionOrderStatus.Preparing
+        )), Times.Once);
 
         #endregion
     }
