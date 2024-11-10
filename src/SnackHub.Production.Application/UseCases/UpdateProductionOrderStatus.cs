@@ -6,7 +6,7 @@ using SnackHub.Production.Application.Models.Responses;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class UpdateProductionOrderStatus(IProductionOrderRepository productionOrderRepository) : IUpdateKitchenOrderStatusUseCase
+public class UpdateProductionOrderStatus(IProductionOrderRepository productionOrderRepository) : IUpdateProductionOrderStatus
 {
 
     public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)

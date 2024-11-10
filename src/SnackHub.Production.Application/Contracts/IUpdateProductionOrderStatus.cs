@@ -3,7 +3,7 @@ using SnackHub.Production.Application.Models.Responses;
 
 namespace SnackHub.Production.Application.Contracts;
 
-public interface IUpdateKitchenOrderStatusUseCase
+public interface IUpdateProductionOrderStatus
 {
     Task<UpdateProductionOrderStatusResponse> Execute(UpdateProductionOrderStatus orderStatusRequest);
 }
