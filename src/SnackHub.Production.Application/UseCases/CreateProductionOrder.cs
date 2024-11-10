@@ -14,14 +14,20 @@ public class CreateProductionOrder(
     {
         var response = new CreateKitchenOrderResponse();
 
-        //var items = order
-        //    .Items
-        //    .Select(orderItem => ProductionOrderItem.Factory.Create(orderItem.ProductName, orderItem.Quantity))
-        //    .ToList();
+        List<ProductionOrderItem> items = mapProductionOrderItems(request);
 
-        await _productionOrderRepository.AddAsync(new Domain.Entities.ProductionOrder(request.OrderId, []));
+        var productionOrder = ProductionOrder.Factory.Create(request.OrderId, items);
+
+        await _productionOrderRepository.AddAsync(productionOrder);
 
         return response;
+    }
 
+    private static List<ProductionOrderItem> mapProductionOrderItems(CreateProductionOrderRequest request)
+    {
+        return request
+            .Items
+            .Select(orderItem => ProductionOrderItem.Factory.Create(orderItem.ProductName, orderItem.Quantity))
+            .ToList();
     }
 }
