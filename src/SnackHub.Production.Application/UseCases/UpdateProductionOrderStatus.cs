@@ -1,4 +1,5 @@
 using SnackHub.Domain.Contracts;
+using SnackHub.Domain.Entities;
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.Models.Responses;
@@ -10,20 +11,36 @@ public class UpdateProductionOrderStatus(IProductionOrderRepository productionOr
 
     public async Task<UpdateKitchenOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
     {
-        var response = new UpdateKitchenOrderStatusResponse();
-
         var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
 
-        if (productionOrder is null)
+        if(!IsRequestValid(
+            productionOrder, 
+            orderStatusRequest, 
+            out UpdateKitchenOrderStatusResponse response))
         {
-            response.AddNotification(nameof(orderStatusRequest.OrderId), "Production order not found!");
             return response;
         }
 
-        productionOrder.UpdateStatus();
+        productionOrder!.UpdateStatus();
 
         await productionOrderRepository.EditAsync(productionOrder);
 
         return response;
+    }
+
+    public static bool IsRequestValid(
+        ProductionOrder? productionOrder,
+        Models.Requests.UpdateProductionOrderStatus orderStatusRequest,
+        out UpdateKitchenOrderStatusResponse response)
+    {
+        response = new UpdateKitchenOrderStatusResponse();
+
+        if (productionOrder is null)
+        {
+            response.AddNotification(nameof(orderStatusRequest.OrderId), "Production order not found!");
+            return false;
+        }
+
+        return true;
     }
 }
