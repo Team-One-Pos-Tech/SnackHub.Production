@@ -5,20 +5,14 @@ using SnackHub.Production.Application.Models.Responses;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class UpdateProductionOrderStatus : IUpdateKitchenOrderStatusUseCase
+public class UpdateProductionOrderStatus(IProductionOrderRepository productionOrderRepository) : IUpdateKitchenOrderStatusUseCase
 {
-    private readonly IProductionOrderRepository _kitchenOrderRepository;
-
-    public UpdateProductionOrderStatus(IProductionOrderRepository kitchenOrderRepository)
-    {
-        _kitchenOrderRepository = kitchenOrderRepository;
-    }
 
     public async Task<UpdateKitchenOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
     {
         var response = new UpdateKitchenOrderStatusResponse();
 
-        var kitchenOrder = await _kitchenOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
+        var kitchenOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
         if (kitchenOrder is null)
         {
             response.AddNotification(nameof(orderStatusRequest.OrderId), "Kitchen request for order not found!");
@@ -28,7 +22,7 @@ public class UpdateProductionOrderStatus : IUpdateKitchenOrderStatusUseCase
         try
         {
             kitchenOrder.UpdateStatus();
-            await _kitchenOrderRepository.EditAsync(kitchenOrder);
+            await productionOrderRepository.EditAsync(kitchenOrder);
         }
         catch (Exception exception)
         {

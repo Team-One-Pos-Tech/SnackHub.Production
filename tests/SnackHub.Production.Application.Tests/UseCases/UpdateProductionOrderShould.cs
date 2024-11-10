@@ -28,6 +28,9 @@ internal class UpdateProductionOrdersShould
             OrderId = Guid.NewGuid()
         };
 
+        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.OrderId))
+            .ReturnsAsync(new Domain.Entities.ProductionOrder(request.OrderId, []));
+
         #endregion
 
         #region Act
