@@ -14,7 +14,7 @@ public class CreateProductionOrder(
     {
         var response = new CreateKitchenOrderResponse();
 
-        List<ProductionOrderItem> items = mapProductionOrderItems(request);
+        List<ProductionOrderItem> items = MapProductionOrderItems(request);
 
         var productionOrder = ProductionOrder.Factory.Create(request.OrderId, items);
 
@@ -23,7 +23,7 @@ public class CreateProductionOrder(
         return response;
     }
 
-    private static List<ProductionOrderItem> mapProductionOrderItems(CreateProductionOrderRequest request)
+    private static List<ProductionOrderItem> MapProductionOrderItems(CreateProductionOrderRequest request)
     {
         return request
             .Items
