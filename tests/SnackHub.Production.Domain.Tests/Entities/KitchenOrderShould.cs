@@ -3,8 +3,8 @@ using NUnit.Framework;
 using SnackHub.Domain.Entities;
 using SnackHub.Domain.ValueObjects;
 
-using KitchenOrderFactory = SnackHub.Domain.Entities.KitchenOrder.Factory;
-using KitchenOrderItemFactory = SnackHub.Domain.ValueObjects.KitchenOrderItem.Factory;
+using KitchenOrderFactory = SnackHub.Domain.Entities.ProductionOrder.Factory;
+using KitchenOrderItemFactory = SnackHub.Domain.ValueObjects.ProductionOrderItem.Factory;
 
 namespace SnackHub.Domain.Tests.Entities;
 
@@ -56,7 +56,7 @@ public class KitchenOrderShould
     public void ShouldTransitionStatusAsExpected(
         [ValueSource(nameof(StatusTransitions))] (KitchenOrderStatus From, KitchenOrderStatus To) transition)
     {
-        var kitchenOrder = new KitchenOrder(Guid.NewGuid(), Guid.NewGuid(), [], transition.From);
+        var kitchenOrder = new ProductionOrder(Guid.NewGuid(), Guid.NewGuid(), [], transition.From);
         
         kitchenOrder.UpdateStatus();
         

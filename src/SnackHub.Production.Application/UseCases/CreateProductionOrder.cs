@@ -5,17 +5,9 @@ using SnackHub.Production.Application.Models;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class CreateKitchenOrderUseCase : ICreateKitchenOrderUseCase
+public class CreateProductionOrder(IOrderRepository _orderRepository,
+    IProductionOrderRepository _productionOrderRepository) : ICreateProductionOrder
 {
-    private readonly IKitchenOrderRepository _kitchenOrderRepository;
-    private readonly IOrderRepository _orderRepository;
-
-    public CreateKitchenOrderUseCase(IOrderRepository orderRepository,
-        IKitchenOrderRepository kitchenOrderRepository)
-    {
-        _orderRepository = orderRepository;
-        _kitchenOrderRepository = kitchenOrderRepository;
-    }
 
     public async Task<CreateKitchenOrderResponse> Execute(CreateKitchenOrderRequest request)
     {
@@ -38,10 +30,10 @@ public class CreateKitchenOrderUseCase : ICreateKitchenOrderUseCase
         {
             var items = order
                 .Items
-                .Select(orderItem => KitchenOrderItem.Factory.Create(orderItem.ProductName, orderItem.Quantity))
+                .Select(orderItem => ProductionOrderItem.Factory.Create(orderItem.ProductName, orderItem.Quantity))
                 .ToList();
 
-            await _kitchenOrderRepository.AddAsync(new Domain.Entities.KitchenOrder(order.Id, items));
+            await _productionOrderRepository.AddAsync(new Domain.Entities.ProductionOrder(order.Id, items));
 
             return response;
         }

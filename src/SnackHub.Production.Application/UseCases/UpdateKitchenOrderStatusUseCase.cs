@@ -6,9 +6,9 @@ namespace SnackHub.Production.Application.UseCases;
 
 public class UpdateKitchenOrderStatusUseCase : IUpdateKitchenOrderStatusUseCase
 {
-    private readonly IKitchenOrderRepository _kitchenOrderRepository;
+    private readonly IProductionOrderRepository _kitchenOrderRepository;
 
-    public UpdateKitchenOrderStatusUseCase(IKitchenOrderRepository kitchenOrderRepository)
+    public UpdateKitchenOrderStatusUseCase(IProductionOrderRepository kitchenOrderRepository)
     {
         _kitchenOrderRepository = kitchenOrderRepository;
     }

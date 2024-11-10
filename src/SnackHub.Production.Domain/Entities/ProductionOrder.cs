@@ -3,16 +3,16 @@ using SnackHub.Domain.ValueObjects;
 
 namespace SnackHub.Domain.Entities;
 
-public class KitchenOrder : Entity<Guid>, IAggregateRoot
+public class ProductionOrder : Entity<Guid>, IAggregateRoot
 {
-    protected KitchenOrder( ): base(Guid.NewGuid()) { }
+    protected ProductionOrder( ): base(Guid.NewGuid()) { }
     
-    public KitchenOrder(Guid orderId, IReadOnlyCollection<KitchenOrderItem> items) 
+    public ProductionOrder(Guid orderId, IReadOnlyCollection<ProductionOrderItem> items) 
         : this(Guid.NewGuid(), orderId, items, KitchenOrderStatus.Received)
     {
     }
     
-    public KitchenOrder(Guid id, Guid orderId, IReadOnlyCollection<KitchenOrderItem> items, KitchenOrderStatus status)
+    public ProductionOrder(Guid id, Guid orderId, IReadOnlyCollection<ProductionOrderItem> items, KitchenOrderStatus status)
         : base(id)
     {
         ArgumentOutOfRangeException.ThrowIfEqual(orderId, Guid.Empty);
@@ -24,7 +24,7 @@ public class KitchenOrder : Entity<Guid>, IAggregateRoot
     }
     
     public virtual Guid OrderId { get; private set; }
-    public virtual IReadOnlyCollection<KitchenOrderItem> Items { get; private set; }
+    public virtual IReadOnlyCollection<ProductionOrderItem> Items { get; private set; }
     public virtual KitchenOrderStatus Status { get; private set; }
 
     public void UpdateStatus()
@@ -47,9 +47,9 @@ public class KitchenOrder : Entity<Guid>, IAggregateRoot
     
     public static class Factory
     {
-        public static KitchenOrder Create(Guid orderId, IReadOnlyCollection<KitchenOrderItem> items)
+        public static ProductionOrder Create(Guid orderId, IReadOnlyCollection<ProductionOrderItem> items)
         {
-            return new KitchenOrder(orderId, items);
+            return new ProductionOrder(orderId, items);
         }
     }
 }
