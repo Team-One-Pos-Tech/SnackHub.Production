@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Application.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Domain.Tests", "tests\SnackHub.Production.Domain.Tests\SnackHub.Domain.Tests.csproj", "{B56933DC-CC46-414D-9BD8-02846E41118A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnackHub.Production.Behavior.Tests", "tests\SnackHub.Production.Behavior.Tests\SnackHub.Production.Behavior.Tests.csproj", "{9CC4B9D9-509B-4642-A83D-0705A24FB68A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{B56933DC-CC46-414D-9BD8-02846E41118A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B56933DC-CC46-414D-9BD8-02846E41118A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B56933DC-CC46-414D-9BD8-02846E41118A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC4B9D9-509B-4642-A83D-0705A24FB68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC4B9D9-509B-4642-A83D-0705A24FB68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC4B9D9-509B-4642-A83D-0705A24FB68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC4B9D9-509B-4642-A83D-0705A24FB68A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{31071CEC-4A52-48A5-809A-AD624286A87E} = {114324A4-E20D-4187-8DDB-2C735AEA01E5}
 		{A3A40DA6-D32A-4942-BE1E-E72A7F915F08} = {DAB6F12C-9AF3-43C8-B9FB-CF63B28EA72D}
 		{B56933DC-CC46-414D-9BD8-02846E41118A} = {DAB6F12C-9AF3-43C8-B9FB-CF63B28EA72D}
+		{9CC4B9D9-509B-4642-A83D-0705A24FB68A} = {DAB6F12C-9AF3-43C8-B9FB-CF63B28EA72D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7CA7F01-2C9D-45B1-9A91-1374F5468643}
