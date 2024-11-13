@@ -15,8 +15,4 @@
     <ProjectReference Include="..\SnackHub.Production.Domain\SnackHub.Production.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EventConsumers\" />
-  </ItemGroup>
-
 </Project>
