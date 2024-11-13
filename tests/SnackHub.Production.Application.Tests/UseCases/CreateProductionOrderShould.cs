@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using Moq;
-using SnackHub.Domain.Contracts;
-using SnackHub.Domain.Entities;
 using SnackHub.Production.Application.Models;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.UseCases;
+using SnackHub.Production.Domain.Contracts;
+using SnackHub.Production.Domain.Entities;
 
 namespace SnackHub.Application.Tests.UseCases;
 
