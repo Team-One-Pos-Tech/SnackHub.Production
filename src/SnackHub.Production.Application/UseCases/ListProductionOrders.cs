@@ -1,6 +1,6 @@
-using SnackHub.Domain.Contracts;
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Responses;
+using SnackHub.Production.Domain.Contracts;
 
 namespace SnackHub.Production.Application.UseCases;
 

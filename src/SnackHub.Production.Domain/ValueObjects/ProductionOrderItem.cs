@@ -1,4 +1,6 @@
-namespace SnackHub.Domain.ValueObjects;
+using SnackHub.Production.Domain.Base;
+
+namespace SnackHub.Production.Domain.ValueObjects;
 
 public class ProductionOrderItem : ValueObject
 {

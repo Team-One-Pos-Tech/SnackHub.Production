@@ -1,7 +1,7 @@
-using SnackHub.Domain.Base;
-using SnackHub.Domain.ValueObjects;
+using SnackHub.Production.Domain.Base;
+using SnackHub.Production.Domain.ValueObjects;
 
-namespace SnackHub.Domain.Entities;
+namespace SnackHub.Production.Domain.Entities;
 
 public class ProductionOrder : Entity<Guid>, IAggregateRoot
 {
