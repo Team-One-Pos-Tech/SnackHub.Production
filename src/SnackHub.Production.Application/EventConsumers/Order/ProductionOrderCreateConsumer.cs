@@ -2,10 +2,11 @@
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Consumers;
 using SnackHub.Production.Application.Models.Requests;
+using SnackHub.Production.Domain.ValueObjects;
 
 namespace SnackHub.Production.Application.EventConsumers.Order;
 
-public class OrderConsumer(ICreateProductionOrder createProductionOrder) : IConsumer<ProductionOrderSubmittedRequest>
+public class ProductionOrderCreateConsumer(ICreateProductionOrder createProductionOrder) : IConsumer<ProductionOrderSubmittedRequest>
 {
     public async Task Consume(ConsumeContext<ProductionOrderSubmittedRequest> context)
     {
@@ -20,6 +21,6 @@ public class OrderConsumer(ICreateProductionOrder createProductionOrder) : ICons
 
         await createProductionOrder.Execute(request);
 
-        await context.Publish(new ProductionOrderAccepted(context.Message.OrderId));
+        await context.Publish(new ProductionOrderStatusUpdated(context.Message.OrderId, ProductionOrderStatus.Received));
     }
 }
