@@ -1,6 +1,6 @@
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using SnackHub.Production.Application.Models.Product;
+using SnackHub.Production.Application.Models.Consumers;
 using SnackHub.Production.Domain.Contracts;
 using ProductFactory = SnackHub.Production.Domain.Entities.Product;
 

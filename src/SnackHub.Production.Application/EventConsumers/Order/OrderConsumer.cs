@@ -18,7 +18,8 @@ public class OrderConsumer(ICreateProductionOrder createProductionOrder) : ICons
             })
         };
 
-
         await createProductionOrder.Execute(request);
+
+        await context.Publish(new ProductionOrderAccepted(context.Message.OrderId));
     }
 }

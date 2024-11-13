@@ -1,4 +1,6 @@
+using MassTransit;
 using SnackHub.Production.Application.Contracts;
+using SnackHub.Production.Application.Models.Consumers;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.Models.Responses;
 using SnackHub.Production.Domain.Contracts;
