@@ -1,15 +1,17 @@
 ﻿using FluentAssertions;
+using MassTransit;
 using Moq;
+using SnackHub.Production.Application.UseCases;
 using SnackHub.Production.Domain.Contracts;
 using SnackHub.Production.Domain.Entities;
 using SnackHub.Production.Domain.ValueObjects;
-using UpdateProductionOrderStatus = SnackHub.Production.Application.Models.Requests.UpdateProductionOrderStatus;
 
 namespace SnackHub.Application.Tests.UseCases;
 
 internal class UpdateProductionOrdersShould
 {
     private Mock<IProductionOrderRepository> productionOrderRepositoryMock;
+    private Mock<IPublishEndpoint> publicEndpoint;
     private Production.Application.UseCases.UpdateProductionOrderStatus updateProductionOrders;
 
     [SetUp]
@@ -17,7 +19,9 @@ internal class UpdateProductionOrdersShould
     {
         productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
 
-        updateProductionOrders = new Production.Application.UseCases.UpdateProductionOrderStatus(productionOrderRepositoryMock.Object);
+        publicEndpoint = new Mock<IPublishEndpoint>();
+
+        updateProductionOrders = new UpdateProductionOrderStatus(productionOrderRepositoryMock.Object, publicEndpoint.Object);
     }
 
     [Test]
@@ -25,7 +29,7 @@ internal class UpdateProductionOrdersShould
     {
         #region Arrange
 
-        var request = new UpdateProductionOrderStatus
+        var request = new Production.Application.Models.Requests.UpdateProductionOrderStatus
         {
             OrderId = Guid.NewGuid()
         };
@@ -60,7 +64,7 @@ internal class UpdateProductionOrdersShould
     {
         #region Arrange
 
-        var request = new UpdateProductionOrderStatus
+        var request = new Production.Application.Models.Requests.UpdateProductionOrderStatus
         {
             OrderId = Guid.NewGuid()
         };
