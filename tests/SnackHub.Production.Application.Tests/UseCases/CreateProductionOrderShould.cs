@@ -36,7 +36,7 @@ internal class CreateProductionOrderShould
     }
 
     [Test]
-    public async Task Should_Create_Production_Order_With_Items()
+    public async Task Should_Create_Production_Order_With_Product_Items()
     {
         #region Arrange
         var productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
@@ -44,14 +44,14 @@ internal class CreateProductionOrderShould
         var createProductionOrder = new CreateProductionOrder(productionOrderRepositoryMock.Object);
 
         var orderId = Guid.NewGuid();
+        var productId = Guid.NewGuid();
 
         var request = new CreateProductionOrderRequest(orderId)
         {
-            Items = new List<ProductionOrderItemRequest>
+            Items = new List<ProductionItemRequest>
             {
                 new() {
-                    Id = Guid.NewGuid(),
-                    ProductName = "X-Bacon",
+                    ProductId = productId,
                     Quantity = 3
                 }
             }
@@ -60,6 +60,7 @@ internal class CreateProductionOrderShould
         #endregion
 
         #region Act
+
         var response = await createProductionOrder.Execute(request);
 
         #endregion
@@ -68,7 +69,7 @@ internal class CreateProductionOrderShould
         response.IsValid.Should().BeTrue();
 
         productionOrderRepositoryMock.Verify(x => x.AddAsync(It.Is<ProductionOrder>(
-                request => request.Items.Any(x => x.ProductName == "X-Bacon" && x.Quantity == 3)
+                request => request.Items.Any(x => x.ProductId == productId && x.Quantity == 3)
             )), Times.Once);
         #endregion
     }

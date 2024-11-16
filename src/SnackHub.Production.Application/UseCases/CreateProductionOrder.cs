@@ -30,7 +30,7 @@ public class CreateProductionOrder(
     {
         return request
             .Items
-            .Select(orderItem => ProductionOrderItem.Factory.Create(orderItem.ProductName, orderItem.Quantity))
+            .Select(orderItem => new ProductionOrderItem(orderItem.ProductId, orderItem.Quantity))
             .ToList();
     }
 }

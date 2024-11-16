@@ -29,15 +29,15 @@ internal class ListProductionOrdersShould
         productionOrderRepositoryMock.Setup(Setup => Setup.ListCurrentAsync()   )
             .ReturnsAsync(new List<ProductionOrder>
             {
-                ProductionOrder.Factory.Create(Guid.NewGuid(), new List<ProductionOrderItem>
-                {
-                    ProductionOrderItem.Factory.Create("X-Bacon", 3)
-                }),
-                ProductionOrder.Factory.Create(Guid.NewGuid(), new List<ProductionOrderItem>
-                {
-                    ProductionOrderItem.Factory.Create("Coke", 2),
-                    ProductionOrderItem.Factory.Create("Water", 1),
-                })
+                ProductionOrder.Factory.Create(Guid.NewGuid(),
+                [
+                    new ProductionOrderItem(Guid.NewGuid(), 3)
+                ]),
+                ProductionOrder.Factory.Create(Guid.NewGuid(),
+                [
+                    new ProductionOrderItem(Guid.NewGuid(), 2),
+                    new ProductionOrderItem(Guid.NewGuid(), 1),
+                ])
             });
 
         #endregion

@@ -4,29 +4,18 @@ namespace SnackHub.Production.Domain.ValueObjects;
 
 public class ProductionOrderItem : ValueObject
 {
-    public string ProductName { get; init; }
+    public Guid ProductId { get; init; }
     public int Quantity { get; init; }
     
-    protected ProductionOrderItem(string productName, int quantity)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(productName);
-        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
-        
-        ProductName = productName;
+    public ProductionOrderItem(Guid productId, int quantity)
+    {   
+        ProductId = productId;
         Quantity = quantity;
     }
     
     protected override IEnumerable<object> GetEqualityComponents()
     {
-        yield return ProductName;
+        yield return ProductId;
         yield return Quantity;
-    }
-    
-    public static class Factory
-    {
-        public static ProductionOrderItem Create(string productName, int quantity)
-        {
-            return new ProductionOrderItem(productName, quantity);
-        }
     }
 }

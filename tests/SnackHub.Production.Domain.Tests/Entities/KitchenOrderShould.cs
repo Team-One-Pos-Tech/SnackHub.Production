@@ -2,8 +2,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using SnackHub.Production.Domain.Entities;
 using SnackHub.Production.Domain.ValueObjects;
-using KitchenOrderFactory = SnackHub.Production.Domain.Entities.ProductionOrder.Factory;
-using KitchenOrderItemFactory = SnackHub.Production.Domain.ValueObjects.ProductionOrderItem.Factory;
 
 namespace SnackHub.Domain.Tests.Entities;
 
@@ -13,9 +11,10 @@ public class KitchenOrderShould
     public void BeCreatedSuccessfullyWhenRequirementsAreMet()
     {
         var orderId = Guid.NewGuid();
-        
-        var kitchenOrder = KitchenOrderFactory.Create(orderId, [
-            KitchenOrderItemFactory.Create("X-Bacon", 3)
+        var productId = Guid.NewGuid();
+
+        var kitchenOrder = new ProductionOrder(orderId, [
+            new ProductionOrderItem(productId, 3)
         ]);
         
         kitchenOrder
@@ -26,29 +25,9 @@ public class KitchenOrderShould
                 Status = ProductionOrderStatus.Received,
                 Items = new []
                 {
-                    new
-                    {
-                        ProductName = "X-Bacon",
-                        Quantity = 3
-                    }
+                    new ProductionOrderItem(productId, 3)
                 }
             });
-    }
-    
-    [Test]
-    public void ShouldFailOnInvalidOrderId()
-    {
-        var act = () => KitchenOrderFactory.Create(Guid.Empty, []);
-        
-        act.Should().ThrowExactly<ArgumentOutOfRangeException>();
-    }
-    
-    [Test]
-    public void ShouldFailOnInvalidItems()
-    {
-        var act = () => KitchenOrderFactory.Create(Guid.NewGuid(), null!);
-        
-        act.Should().ThrowExactly<ArgumentNullException>();
     }
 
     [Test]

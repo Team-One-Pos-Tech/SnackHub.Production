@@ -1,6 +1,7 @@
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Responses;
 using SnackHub.Production.Domain.Contracts;
+using SnackHub.Production.Domain.ValueObjects;
 
 namespace SnackHub.Production.Application.UseCases;
 
@@ -8,12 +9,14 @@ public class ListProductionOrders(IProductionOrderRepository productionOrderRepo
 {
     public async Task<IEnumerable<ProductionOrderResponse>> Get()
     {
-        var kitchenRequests = await productionOrderRepository.ListCurrentAsync();
+        var productionOrders = await productionOrderRepository.ListCurrentAsync();
 
-        return kitchenRequests.Select(o => new ProductionOrderResponse
+        return productionOrders.Select(o => new ProductionOrderResponse
         {
             OrderId = o.OrderId,
-            Items = o.Items.Select(i => (i.ProductName, i.Quantity)).ToList(),
+            Items = o.Items.Select(i => new ProductionItemResponse { 
+                ProductId = i.ProductId, Quantity = i.Quantity
+            }).ToList(),
             Status = o.Status.ToString(),
             CreatedAt = o.CreatedAt,
             UpdatedAt = o.UpdatedAt

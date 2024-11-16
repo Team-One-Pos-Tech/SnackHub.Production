@@ -12,9 +12,9 @@ public class ProductionOrderCreateConsumer(ICreateProductionOrder createProducti
     {
         var request = new CreateProductionOrderRequest(context.Message.OrderId)
         {
-            Items = context.Message.ProductList.Select(x => new ProductionOrderItemRequest
+            Items = context.Message.ProductList.Select(x => new ProductionItemRequest
             {
-                Id = x.ProductId,
+                ProductId = x.ProductId,
                 Quantity = x.Quantity
             })
         };

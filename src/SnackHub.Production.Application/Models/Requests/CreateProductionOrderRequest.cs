@@ -10,5 +10,5 @@ public record CreateProductionOrderRequest
 
     public Guid OrderId { get; init; }
 
-    public IEnumerable<ProductionOrderItemRequest> Items { get; set; }
+    public IEnumerable<ProductionItemRequest> Items { get; set; }
 }
