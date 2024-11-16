@@ -13,13 +13,13 @@ public class UpdateProductionOrderStatus(
     ) : IUpdateProductionOrderStatus
 {
 
-    public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateProductionOrderStatus orderStatusRequest)
+    public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateStatusRequest orderStatusRequestRequest)
     {
-        var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequest.OrderId);
+        var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequestRequest.OrderId);
 
         if(!IsRequestValid(
             productionOrder, 
-            orderStatusRequest, 
+            orderStatusRequestRequest, 
             out UpdateProductionOrderStatusResponse response))
         {
             return response;
@@ -37,14 +37,14 @@ public class UpdateProductionOrderStatus(
 
     public static bool IsRequestValid(
         ProductionOrder? productionOrder,
-        Models.Requests.UpdateProductionOrderStatus orderStatusRequest,
+        Models.Requests.UpdateStatusRequest orderStatusRequestRequest,
         out UpdateProductionOrderStatusResponse response)
     {
         response = new UpdateProductionOrderStatusResponse();
 
         if (productionOrder is null)
         {
-            response.AddNotification(nameof(orderStatusRequest.OrderId), "Production order not found!");
+            response.AddNotification(nameof(orderStatusRequestRequest.OrderId), "Production order not found!");
             return false;
         }
 
