@@ -29,7 +29,7 @@ internal class UpdateProductionOrdersShould
     {
         #region Arrange
 
-        var request = new Production.Application.Models.Requests.UpdateProductionOrderStatus
+        var request = new Production.Application.Models.Requests.UpdateStatusRequest
         {
             OrderId = Guid.NewGuid()
         };
@@ -64,7 +64,7 @@ internal class UpdateProductionOrdersShould
     {
         #region Arrange
 
-        var request = new Production.Application.Models.Requests.UpdateProductionOrderStatus
+        var request = new Production.Application.Models.Requests.UpdateStatusRequest
         {
             OrderId = Guid.NewGuid()
         };

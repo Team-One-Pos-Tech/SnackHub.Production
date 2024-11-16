@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SnackHub.Production.Api.Extensions;
 using SnackHub.Production.Application.Contracts;
@@ -11,7 +10,8 @@ namespace SnackHub.Production.Api.Controllers;
 [Route("api/[controller]/v1")]
 public class ProductionOrderController(
     IListProductionOrders listProductionOrders,
-    IUpdateProductionOrderStatus updateProductionOrderStatus
+    IUpdateProductionOrderStatus updateProductionOrderStatus,
+    ICreateProductionOrder createProductionOrder
     ) : ControllerBase
 {
     [HttpGet]
@@ -23,7 +23,20 @@ public class ProductionOrderController(
         
         return Ok(productionOrders);
     }
-    
+
+    [HttpPut("CreateProductionOrder")]
+    [ProducesResponseType(typeof(CreateProductionOrderResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<UpdateProductionOrderStatusResponse>>
+        UpdateStatus([FromBody] CreateProductionOrderRequest request)
+    {
+        var response = await createProductionOrder.Execute(request);
+
+        return response.IsValid
+            ? Ok(response)
+            : ValidationProblem(ModelState.AddNotifications(response.Notifications));
+    }
+
     [HttpPut("UpdateStatus")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status404NotFound)]

@@ -1,27 +1,44 @@
 using System;
 using TechTalk.SpecFlow;
 
-namespace SnackHub.Production.Behavior.Tests.StepDefinitions
+namespace SnackHub.Production.Behavior.Tests.StepDefinitions;
+
+[Binding]
+public class UpdateProductionOrderStepDefinitions(
+    ProductionApiClient productionApiClient,
+    ScenarioContext scenarioContext
+    )
 {
-    [Binding]
-    public class UpdateProductionOrderStepDefinitions
+    [Given(@"existing a production order is in Received status")]
+    public async Task GivenExistingAProductionOrderIsInReceivedStatusAsync()
     {
-        [Given(@"existing a production order is in Received status")]
-        public void GivenExistingAProductionOrderIsInReceivedStatus()
+        var createProductionOrderRequest = new CreateProductionOrderRequest()
         {
-            throw new PendingStepException();
-        }
+            OrderId = Guid.NewGuid(),
+            Items =
+            [
+                new()
+                {
+                   Id = Guid.NewGuid(),
+                   Quantity = 10
+                }
+            ]
+        };
 
-        [When(@"Update Status")]
-        public void WhenUpdateStatus()
-        {
-            throw new PendingStepException();
-        }
+        var response = await productionApiClient.CreateProductionOrderAsync(createProductionOrderRequest);
 
-        [Then(@"the Production Order should be in in Preparing status")]
-        public void ThenTheProductionOrderShouldBeInInPreparingStatus()
-        {
-            throw new PendingStepException();
-        }
+        scenarioContext["createProductionOrderRequest"] = createProductionOrderRequest;
+    }
+
+    [When(@"Update Status")]
+    public void WhenUpdateStatus()
+    {
+        throw new PendingStepException();
+    }
+
+    [Then(@"the Production Order should be in in Preparing status")]
+    public void ThenTheProductionOrderShouldBeInInPreparingStatus()
+    {
+        throw new PendingStepException();
     }
 }
