@@ -19,7 +19,8 @@ namespace SnackHub.Production.Api
                 .Services
                 .AddDatabaseContext(builder.Configuration)
                 .AddRepositories()
-                .AddMassTransit(builder.Configuration);
+                .AddMassTransit(builder.Configuration)
+                .AddUseCases();
 
             var app = builder.Build();
 
