@@ -26,7 +26,7 @@ internal class ListProductionOrdersShould
     {
         #region Arrange
 
-        productionOrderRepositoryMock.Setup(Setup => Setup.ListCurrentAsync()   )
+        productionOrderRepositoryMock.Setup(Setup => Setup.ListAllAsync()   )
             .ReturnsAsync(new List<ProductionOrder>
             {
                 ProductionOrder.Factory.Create(Guid.NewGuid(),

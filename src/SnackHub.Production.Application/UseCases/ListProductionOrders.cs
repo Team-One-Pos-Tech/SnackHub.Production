@@ -9,10 +9,11 @@ public class ListProductionOrders(IProductionOrderRepository productionOrderRepo
 {
     public async Task<IEnumerable<ProductionOrderResponse>> Get()
     {
-        var productionOrders = await productionOrderRepository.ListCurrentAsync();
+        var productionOrders = await productionOrderRepository.ListAllAsync();
 
         return productionOrders.Select(o => new ProductionOrderResponse
         {
+            Id = o.Id,
             OrderId = o.OrderId,
             Items = o.Items.Select(i => new ProductionItemResponse { 
                 ProductId = i.ProductId, Quantity = i.Quantity

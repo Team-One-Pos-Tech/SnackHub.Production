@@ -16,7 +16,7 @@ public class UpdateProductionOrderStepDefinitions(
             [
                 new()
                 {
-                   Id = Guid.NewGuid(),
+                   ProductId = Guid.NewGuid(),
                    Quantity = 10
                 }
             ]
@@ -25,16 +25,17 @@ public class UpdateProductionOrderStepDefinitions(
         var response = await productionApiClient.CreateProductionOrderAsync(createProductionOrderRequest);
 
         scenarioContext["createProductionOrderRequest"] = createProductionOrderRequest;
+        scenarioContext["productionOrderId"] = response.Id;
     }
 
     [When(@"Update Status")]
     public async Task WhenUpdateStatusAsync()
     {
-        var createProductionOrderRequest = scenarioContext.Get<CreateProductionOrderRequest>("createProductionOrderRequest");
+        var productionOrderId = scenarioContext.Get<Guid>("productionOrderId");
 
         var request = new UpdateStatusRequest()
         {
-            OrderId = createProductionOrderRequest.OrderId
+            Id = productionOrderId
         };
 
         var response = await productionApiClient.UpdateStatusAsync(request);
@@ -43,11 +44,11 @@ public class UpdateProductionOrderStepDefinitions(
     [Then(@"the Production Order should be in in Preparing status")]
     public async Task ThenTheProductionOrderShouldBeInInPreparingStatusAsync()
     {
-        var createProductionOrderRequest = scenarioContext.Get<CreateProductionOrderRequest>("createProductionOrderRequest");
+        var productionOrderId = scenarioContext.Get<Guid>("productionOrderId");
 
         var allOrders = await productionApiClient.GetAllProductionOrdersAsync();
 
-        var updatedOrder = allOrders.First(x => x.OrderId == createProductionOrderRequest.OrderId);
+        var updatedOrder = allOrders.First(x => x.Id == productionOrderId);
 
         updatedOrder.Status.Should().Be("Preparing");
     }

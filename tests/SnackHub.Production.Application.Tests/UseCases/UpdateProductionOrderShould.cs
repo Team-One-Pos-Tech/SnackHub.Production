@@ -31,12 +31,12 @@ internal class UpdateProductionOrdersShould
 
         var request = new Production.Application.Models.Requests.UpdateStatusRequest
         {
-            OrderId = Guid.NewGuid()
+            Id = Guid.NewGuid()
         };
 
-        var productionOrder = new ProductionOrder(Guid.NewGuid(), request.OrderId, [], ProductionOrderStatus.Received);
+        var productionOrder = new ProductionOrder(Guid.NewGuid(), request.Id, ProductionOrderStatus.Received);
 
-        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.OrderId))
+        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.Id))
             .ReturnsAsync(productionOrder);
 
         #endregion
@@ -66,10 +66,10 @@ internal class UpdateProductionOrdersShould
 
         var request = new Production.Application.Models.Requests.UpdateStatusRequest
         {
-            OrderId = Guid.NewGuid()
+            Id = Guid.NewGuid()
         };
 
-        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.OrderId));
+        productionOrderRepositoryMock.Setup(x => x.GetByOderIdAsync(request.Id));
 
         #endregion
 
@@ -83,7 +83,7 @@ internal class UpdateProductionOrdersShould
 
         response.IsValid.Should().BeFalse();
 
-        response.Notifications.First().Key.Should().Be(nameof(request.OrderId));
+        response.Notifications.First().Key.Should().Be(nameof(request.Id));
         response.Notifications.First().Message.Should().Be("Production order not found!");
 
         #endregion

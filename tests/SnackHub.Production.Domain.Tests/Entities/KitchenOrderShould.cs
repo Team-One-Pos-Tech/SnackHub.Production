@@ -34,7 +34,7 @@ public class KitchenOrderShould
     public void ShouldTransitionStatusAsExpected(
         [ValueSource(nameof(StatusTransitions))] (ProductionOrderStatus From, ProductionOrderStatus To) transition)
     {
-        var kitchenOrder = new ProductionOrder(Guid.NewGuid(), Guid.NewGuid(), [], transition.From);
+        var kitchenOrder = new ProductionOrder(Guid.NewGuid(), Guid.NewGuid(), transition.From);
         
         kitchenOrder.UpdateStatus();
         

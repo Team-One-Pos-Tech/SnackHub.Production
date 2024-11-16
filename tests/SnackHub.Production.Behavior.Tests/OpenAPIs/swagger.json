@@ -64,7 +64,7 @@
       }
     },
     "/api/ProductionOrder/v1/CreateProductionOrder": {
-      "put": {
+      "post": {
         "tags": [
           "ProductionOrder"
         ],
@@ -88,8 +88,8 @@
           }
         },
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
@@ -212,7 +212,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ProductionOrderItemRequest"
+              "$ref": "#/components/schemas/ProductionItemRequest"
             },
             "nullable": true
           }
@@ -233,6 +233,10 @@
           "isValid": {
             "type": "boolean",
             "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -276,18 +280,28 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
-      "ProductionOrderItemRequest": {
+      "ProductionItemRequest": {
         "type": "object",
         "properties": {
-          "id": {
+          "productId": {
             "type": "string",
             "format": "uuid"
           },
-          "productName": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductionItemResponse": {
+        "type": "object",
+        "properties": {
+          "productId": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
           "quantity": {
             "type": "integer",
@@ -311,6 +325,10 @@
             "type": "boolean",
             "readOnly": true
           },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "orderId": {
             "type": "string",
             "format": "uuid"
@@ -318,7 +336,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StringInt32ValueTuple"
+              "$ref": "#/components/schemas/ProductionItemResponse"
             },
             "nullable": true
           },
@@ -336,10 +354,6 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
-      },
-      "StringInt32ValueTuple": {
-        "type": "object",
         "additionalProperties": false
       },
       "UpdateProductionOrderStatusResponse": {
@@ -363,7 +377,7 @@
       "UpdateStatusRequest": {
         "type": "object",
         "properties": {
-          "orderId": {
+          "id": {
             "type": "string",
             "format": "uuid"
           }
@@ -405,7 +419,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       }
     }
   }

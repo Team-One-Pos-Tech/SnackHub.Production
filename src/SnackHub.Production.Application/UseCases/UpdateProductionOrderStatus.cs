@@ -15,7 +15,7 @@ public class UpdateProductionOrderStatus(
 
     public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateStatusRequest orderStatusRequestRequest)
     {
-        var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequestRequest.OrderId);
+        var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequestRequest.Id);
 
         if(!IsRequestValid(
             productionOrder, 
@@ -29,8 +29,8 @@ public class UpdateProductionOrderStatus(
 
         await productionOrderRepository.EditAsync(productionOrder);
 
-        await publishEndpoint.Publish(
-            new ProductionOrderStatusUpdated(productionOrder!.OrderId, productionOrder!.Status));
+        //await publishEndpoint.Publish(
+        //    new ProductionOrderStatusUpdated(productionOrder!.OrderId, productionOrder!.Status));
 
         return response;
     }
@@ -44,7 +44,7 @@ public class UpdateProductionOrderStatus(
 
         if (productionOrder is null)
         {
-            response.AddNotification(nameof(orderStatusRequestRequest.OrderId), "Production order not found!");
+            response.AddNotification(nameof(orderStatusRequestRequest.Id), "Production order not found!");
             return false;
         }
 

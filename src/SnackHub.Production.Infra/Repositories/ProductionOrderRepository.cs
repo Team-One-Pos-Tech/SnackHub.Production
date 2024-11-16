@@ -36,7 +36,7 @@ public class ProductionOrderRepository : BaseRepository<ProductionOrder, Product
         return await ListByPredicateAsync(px => true);
     }
 
-    public async Task<IEnumerable<ProductionOrder>> ListCurrentAsync()
+    public Task<IEnumerable<ProductionOrder>> ListCurrentAsync()
     {
         throw new NotImplementedException();
     }

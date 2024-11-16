@@ -24,10 +24,10 @@ public class ProductionOrderController(
         return Ok(productionOrders);
     }
 
-    [HttpPut("CreateProductionOrder")]
-    [ProducesResponseType(typeof(CreateProductionOrderResponse), StatusCodes.Status201Created)]
+    [HttpPost("CreateProductionOrder")]
+    [ProducesResponseType(typeof(CreateProductionOrderResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UpdateProductionOrderStatusResponse>>
+    public async Task<ActionResult<CreateProductionOrderResponse>>
         UpdateStatus([FromBody] CreateProductionOrderRequest request)
     {
         var response = await createProductionOrder.Execute(request);
@@ -38,7 +38,7 @@ public class ProductionOrderController(
     }
 
     [HttpPut("UpdateStatus")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UpdateProductionOrderStatusResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<UpdateProductionOrderStatusResponse>> 
         UpdateStatus([FromBody] UpdateStatusRequest updateStatusRequest)
