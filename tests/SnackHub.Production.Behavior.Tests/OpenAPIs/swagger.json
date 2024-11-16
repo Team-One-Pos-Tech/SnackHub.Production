@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/ProductionOrder/v1": {
+    "/api/ProductionOrder/v1/GetAllProductionOrders": {
       "get": {
         "tags": [
           "ProductionOrder"
@@ -88,22 +88,22 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
+          "201": {
+            "description": "Created",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateProductionOrderStatusResponse"
+                  "$ref": "#/components/schemas/CreateProductionOrderResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateProductionOrderStatusResponse"
+                  "$ref": "#/components/schemas/CreateProductionOrderResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateProductionOrderStatusResponse"
+                  "$ref": "#/components/schemas/CreateProductionOrderResponse"
                 }
               }
             }
@@ -215,6 +215,24 @@
               "$ref": "#/components/schemas/ProductionOrderItemRequest"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateProductionOrderResponse": {
+        "type": "object",
+        "properties": {
+          "notifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "isValid": {
+            "type": "boolean",
+            "readOnly": true
           }
         },
         "additionalProperties": false

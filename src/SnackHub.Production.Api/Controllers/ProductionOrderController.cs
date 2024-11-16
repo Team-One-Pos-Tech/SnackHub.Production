@@ -14,7 +14,7 @@ public class ProductionOrderController(
     ICreateProductionOrder createProductionOrder
     ) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("GetAllProductionOrders")]
     [ProducesResponseType(typeof(IEnumerable<ProductionOrderResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<IEnumerable<ProductionOrderResponse>>> GetAll()

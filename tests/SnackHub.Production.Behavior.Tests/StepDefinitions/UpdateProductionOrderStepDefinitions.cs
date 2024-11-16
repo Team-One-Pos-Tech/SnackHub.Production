@@ -1,11 +1,8 @@
-using System;
-using TechTalk.SpecFlow;
-
 namespace SnackHub.Production.Behavior.Tests.StepDefinitions;
 
 [Binding]
 public class UpdateProductionOrderStepDefinitions(
-    ProductionApiClient productionApiClient,
+    ProductionOrderApiClient productionApiClient,
     ScenarioContext scenarioContext
     )
 {
@@ -31,14 +28,27 @@ public class UpdateProductionOrderStepDefinitions(
     }
 
     [When(@"Update Status")]
-    public void WhenUpdateStatus()
+    public async Task WhenUpdateStatusAsync()
     {
-        throw new PendingStepException();
+        var createProductionOrderRequest = scenarioContext.Get<CreateProductionOrderRequest>("createProductionOrderRequest");
+
+        var request = new UpdateStatusRequest()
+        {
+            OrderId = createProductionOrderRequest.OrderId
+        };
+
+        var response = await productionApiClient.UpdateStatusAsync(request);
     }
 
     [Then(@"the Production Order should be in in Preparing status")]
-    public void ThenTheProductionOrderShouldBeInInPreparingStatus()
+    public async Task ThenTheProductionOrderShouldBeInInPreparingStatusAsync()
     {
-        throw new PendingStepException();
+        var createProductionOrderRequest = scenarioContext.Get<CreateProductionOrderRequest>("createProductionOrderRequest");
+
+        var allOrders = await productionApiClient.GetAllProductionOrdersAsync();
+
+        var updatedOrder = allOrders.First(x => x.OrderId == createProductionOrderRequest.OrderId);
+
+        updatedOrder.Status.Should().Be("Preparing");
     }
 }
