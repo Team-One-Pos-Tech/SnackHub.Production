@@ -14,4 +14,11 @@ public class ProductionOrderItem
         ProductId = productId;
         Quantity = quantity;
     }
+
+    public ProductionOrderItem(Guid id, Guid productId, int quantity)
+    {
+        Id = id;
+        ProductId = productId;
+        Quantity = quantity;
+    }
 }

@@ -5,19 +5,20 @@ using SnackHub.Production.Domain.ValueObjects;
 
 namespace SnackHub.Domain.Tests.Entities;
 
-public class KitchenOrderShould
+public class ProductionOrderShould
 {
     [Test]
     public void BeCreatedSuccessfullyWhenRequirementsAreMet()
     {
         var orderId = Guid.NewGuid();
         var productId = Guid.NewGuid();
+        var itemId = Guid.NewGuid();
 
-        var kitchenOrder = new ProductionOrder(orderId, [
-            new ProductionOrderItem(productId, 3)
+        var productionOrder = new ProductionOrder(orderId, [
+            new ProductionOrderItem(itemId, productId, 3)
         ]);
         
-        kitchenOrder
+        productionOrder
             .Should()
             .BeEquivalentTo(new
             {
@@ -25,7 +26,7 @@ public class KitchenOrderShould
                 Status = ProductionOrderStatus.Received,
                 Items = new []
                 {
-                    new ProductionOrderItem(productId, 3)
+                    new ProductionOrderItem(itemId, productId, 3)
                 }
             });
     }
