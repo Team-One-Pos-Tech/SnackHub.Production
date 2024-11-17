@@ -29,8 +29,8 @@ public class UpdateProductionOrderStatus(
 
         await productionOrderRepository.EditAsync(productionOrder);
 
-        //await publishEndpoint.Publish(
-        //    new ProductionOrderStatusUpdated(productionOrder!.OrderId, productionOrder!.Status));
+        await publishEndpoint.Publish(
+            new ProductionOrderStatusUpdated(productionOrder!.OrderId, productionOrder!.Status));
 
         return response;
     }

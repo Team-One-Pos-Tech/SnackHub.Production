@@ -4,6 +4,7 @@ using DotNet.Testcontainers.Networks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Npgsql;
+using Siteware.StateMachine.Behaviour.Tests.Extensions;
 using SnackHub.Production.Api;
 using SnackHub.Production.Behavior.Tests.Containers;
 
@@ -12,15 +13,14 @@ namespace SnackHub.Production.Behavior.Tests.Hooks;
 [Binding]
 public sealed class EnvironmentSetupHooks
 {
-    private static INetwork _network;
-    private static Postgresql _postgresql;
+    private static Postgresql postgresql;
 
     [BeforeTestRun]
     public static async Task BeforeTestRun(IObjectContainer testThreadContainer)
     {
-        _network = new NetworkBuilder().Build();
-        _postgresql = new Postgresql(_network);
-        await _postgresql.InitializeAsync();
+        var network = new NetworkBuilder().Build();
+        postgresql = new Postgresql(network);
+        await postgresql.InitializeAsync();
 
         HttpClient? apiHttpClient;
 
@@ -29,6 +29,7 @@ public sealed class EnvironmentSetupHooks
         .WithWebHostBuilder(builder =>
         {
             builder.UseEnvironment("Development");
+            builder.UseMocks();
         });
 
         apiHttpClient = application.CreateClient();
@@ -38,7 +39,7 @@ public sealed class EnvironmentSetupHooks
 
         testThreadContainer.RegisterInstanceAs(productionOrderApiClient);
 
-        using var connection = new NpgsqlConnection(_postgresql.ConnectionString);
+        using var connection = new NpgsqlConnection(postgresql.ConnectionString);
 
         connection.Open();
     }
@@ -47,11 +48,11 @@ public sealed class EnvironmentSetupHooks
     [AfterTestRun]
     public static async Task AfterTestRun(IObjectContainer testThreadContainer)
     {
-        await _postgresql.DisposeAsync();
+        await postgresql.DisposeAsync();
     }
 
     public static string GetConnectionString()
     {
-        return _postgresql.ConnectionString;
+        return postgresql.ConnectionString;
     }
 }
