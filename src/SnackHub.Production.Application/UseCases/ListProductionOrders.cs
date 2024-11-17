@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Responses;
 using SnackHub.Production.Domain.Contracts;
@@ -5,10 +6,15 @@ using SnackHub.Production.Domain.ValueObjects;
 
 namespace SnackHub.Production.Application.UseCases;
 
-public class ListProductionOrders(IProductionOrderRepository productionOrderRepository) : IListProductionOrders
+public class ListProductionOrders(
+    ILogger<ListProductionOrders> logger,
+    IProductionOrderRepository productionOrderRepository
+    ) : IListProductionOrders
 {
     public async Task<IEnumerable<ProductionOrderResponse>> Get()
     {
+        logger.LogInformation("Listing all production orders");
+
         var productionOrders = await productionOrderRepository.ListAllAsync();
 
         return productionOrders.Select(o => new ProductionOrderResponse

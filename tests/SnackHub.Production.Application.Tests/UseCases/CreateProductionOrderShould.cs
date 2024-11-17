@@ -1,5 +1,8 @@
-﻿using FluentAssertions;
+﻿using Castle.Core.Logging;
+using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
+using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.UseCases;
@@ -10,14 +13,25 @@ namespace SnackHub.Application.Tests.UseCases;
 
 internal class CreateProductionOrderShould
 {
+    private Mock<IProductionOrderRepository> productionOrderRepositoryMock;
+    private Mock<ILogger<CreateProductionOrder>> loggerMock;
+    private CreateProductionOrder createProductionOrder;
+
+    [SetUp]
+    public void Setup()
+    {
+        productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
+
+        loggerMock = new Mock<ILogger<CreateProductionOrder>>();
+
+        createProductionOrder = new CreateProductionOrder(loggerMock.Object, productionOrderRepositoryMock.Object);
+    }
 
     [Test]
     public async Task Should_Create_Production_Order_Async()
     {
         #region Arrange
-        var productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
-
-        var createProductionOrder = new CreateProductionOrder(productionOrderRepositoryMock.Object);
+        
 
         var orderId = Guid.NewGuid();
 
@@ -39,9 +53,6 @@ internal class CreateProductionOrderShould
     public async Task Should_Create_Production_Order_With_Product_Items()
     {
         #region Arrange
-        var productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
-
-        var createProductionOrder = new CreateProductionOrder(productionOrderRepositoryMock.Object);
 
         var orderId = Guid.NewGuid();
         var productId = Guid.NewGuid();

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 using Moq;
 using SnackHub.Production.Application.UseCases;
 using SnackHub.Production.Domain.Contracts;
@@ -13,6 +14,7 @@ internal class UpdateProductionOrdersShould
     private Mock<IProductionOrderRepository> productionOrderRepositoryMock;
     private Mock<IPublishEndpoint> publicEndpoint;
     private Production.Application.UseCases.UpdateProductionOrderStatus updateProductionOrders;
+    private Mock<ILogger<UpdateProductionOrderStatus>> loggerMock;
 
     [SetUp]
     public void Setup()
@@ -21,7 +23,10 @@ internal class UpdateProductionOrdersShould
 
         publicEndpoint = new Mock<IPublishEndpoint>();
 
-        updateProductionOrders = new UpdateProductionOrderStatus(productionOrderRepositoryMock.Object, publicEndpoint.Object);
+        loggerMock = new Mock<ILogger<UpdateProductionOrderStatus>>();
+
+        updateProductionOrders = new UpdateProductionOrderStatus(
+            loggerMock.Object, productionOrderRepositoryMock.Object, publicEndpoint.Object);
     }
 
     [Test]

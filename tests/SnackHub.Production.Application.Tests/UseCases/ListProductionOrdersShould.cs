@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
-using SnackHub.Production.Application.Models;
 using SnackHub.Production.Application.UseCases;
 using SnackHub.Production.Domain.Contracts;
 using SnackHub.Production.Domain.Entities;
-using SnackHub.Production.Domain.ValueObjects;
 
 namespace SnackHub.Application.Tests.UseCases;
 
@@ -12,13 +11,16 @@ internal class ListProductionOrdersShould
 {
     private Mock<IProductionOrderRepository> productionOrderRepositoryMock;
     private ListProductionOrders listProductionOrders;
+    private Mock<ILogger<ListProductionOrders>> loggerMock;
 
     [SetUp]
     public void Setup()
     {
         productionOrderRepositoryMock = new Mock<IProductionOrderRepository>();
 
-        listProductionOrders = new ListProductionOrders(productionOrderRepositoryMock.Object);
+        loggerMock = new Mock<ILogger<ListProductionOrders>>();
+
+        listProductionOrders = new ListProductionOrders(loggerMock.Object, productionOrderRepositoryMock.Object);
     }
 
     [Test]

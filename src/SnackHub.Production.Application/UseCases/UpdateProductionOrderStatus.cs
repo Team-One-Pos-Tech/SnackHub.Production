@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.Extensions.Logging;
 using SnackHub.Production.Application.Contracts;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.Models.Responses;
@@ -8,6 +9,7 @@ using SnackHub.Production.Domain.Entities;
 namespace SnackHub.Production.Application.UseCases;
 
 public class UpdateProductionOrderStatus(
+    ILogger<UpdateProductionOrderStatus> logger,
     IProductionOrderRepository productionOrderRepository,
     IPublishEndpoint publishEndpoint
     ) : IUpdateProductionOrderStatus
@@ -15,6 +17,8 @@ public class UpdateProductionOrderStatus(
 
     public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateStatusRequest orderStatusRequestRequest)
     {
+        logger.LogInformation("Updating production order status [{productionOrderId}]", orderStatusRequestRequest.Id);
+
         var productionOrder = await productionOrderRepository.GetByOderIdAsync(orderStatusRequestRequest.Id);
 
         if(!IsRequestValid(
@@ -28,6 +32,8 @@ public class UpdateProductionOrderStatus(
         productionOrder!.UpdateStatus();
 
         await productionOrderRepository.EditAsync(productionOrder);
+
+        logger.LogInformation("Production order [{productionOrderId}] status updated", productionOrder.Id);
 
         await publishEndpoint.Publish(
             new ProductionOrderStatusUpdated(productionOrder!.OrderId, productionOrder!.Status));
