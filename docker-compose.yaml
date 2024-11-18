@@ -1,5 +1,46 @@
-docker run -d  --name postgresql -e POSTGRES_PASSWORD=postgres -p 5433:5432 postgres
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - snack-hub-network
 
-docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-management
+  snack-hub-production-app:
+    build:
+      context: ../
+      dockerfile: deploy/Dockerfile
+    container_name: snack-hub-production-api
+    environment:
+        RABBITMQ_HOST: rabbitmq
+        RABBITMQ_USER: guest
+        RABBITMQ_PASSWORD: guest
+    ports:
+      - "8080:8080"
+    networks:
+      - snack-hub-network
+    depends_on:
+      - rabbitmq
+  
+  snack-hub-production-db:
+    image: postgres:latest
+    container_name: snack-hub-production-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: SnackHub-ProductionService
+    ports:
+      - "5432:5432"
+    networks:
+      - snack-hub-network
+    volumes:
+      - snack-hub-production-db:/var/lib/postgresql/data
 
-docker run -d  --name mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin -p 27017:27017 mongo
+volumes:
+  snack-hub-production-db:
+
+networks:
+  snack-hub-network:
+    driver: bridge
