@@ -8,6 +8,7 @@ services:
     networks:
       - snack-hub-network
 
+
   snack-hub-production-app:
     build:
       context: ../
