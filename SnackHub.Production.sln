@@ -21,11 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Behavio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Infra", "src\SnackHub.Production.Infra\SnackHub.Production.Infra.csproj", "{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4367830E-C964-4C8D-B26A-F3AF6594A123}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yaml = docker-compose.yaml
-	EndProjectSection
-EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}"
 EndProject
 Global
