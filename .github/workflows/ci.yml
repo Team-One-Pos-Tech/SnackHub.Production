@@ -1,0 +1,14 @@
+on: [push]
+jobs:
+  build-and-test:
+    uses: Team-One-Pos-Tech/SnackHub.SharedWorkFlows/.github/workflows/build.yml@main
+    with:
+      solution-name: "SnackHub.Production.sln"
+      api-project-name: "SnackHub.Production.Api"
+      
+  docker-setup:
+    needs: build-and-test
+    uses: Team-One-Pos-Tech/SnackHub.SharedWorkFlows/.github/workflows/dockerize.yml@main
+    with:
+      image-name: "team-one-pos-tech/snack-hub-production"
+      api-entrypoint-binary: "SnackHub.Production.Api.dll"
