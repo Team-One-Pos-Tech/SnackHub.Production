@@ -1,5 +1,5 @@
 services:
-  snack-hub-production-api:
+  snackhub.production.api:
     image: ${DOCKER_REGISTRY-}snackhubproductionapi
     build:
       context: .
