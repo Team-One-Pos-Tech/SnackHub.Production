@@ -19,12 +19,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Behavior.Tests", "tests\SnackHub.Production.Behavior.Tests\SnackHub.Production.Behavior.Tests.csproj", "{9CC4B9D9-509B-4642-A83D-0705A24FB68A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnackHub.Production.Infra", "src\SnackHub.Production.Infra\SnackHub.Production.Infra.csproj", "{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SnackHub.Production.Infra", "src\SnackHub.Production.Infra\SnackHub.Production.Infra.csproj", "{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{4367830E-C964-4C8D-B26A-F3AF6594A123}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,6 +62,10 @@ Global
 		{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A2CCB2-0BF0-4CFF-86E7-BF210ADF1D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3606D6B4-5F80-4280-AE6F-9C2D891F6A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

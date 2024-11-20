@@ -23,7 +23,6 @@
 **/values.dev.yaml
 LICENSE
 README.md
-Makefile
 !**/.gitignore
 !.git/HEAD
 !.git/config

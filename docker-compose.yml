@@ -1,0 +1,49 @@
+services:
+  snackhub.production.api:
+    image: ${DOCKER_REGISTRY-}snackhubproductionapi
+    build:
+      context: .
+      dockerfile: src/SnackHub.Production.Api/Dockerfile
+    container_name: snack-hub-production-api
+    environment:
+        RabbitMQ__Host: rabbitmq
+        RabbitMQ__User: guest
+        RabbitMQ__Password: guest
+        Storage__PostgreSQL__Host: snack-hub-production-db
+        Storage__PostgreSQL__User: postgres
+        Storage__PostgreSQL__Password: postgres
+        Storage__PostgreSQL__Database: SnackHub-ProductionService
+    networks:
+      - snack-hub-network
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq
+    ports:
+       - "5672:5672"
+       - "15672:15672"
+    networks:
+       - snack-hub-network
+
+  snack-hub-production-db:
+    image: postgres:latest
+    container_name: snack-hub-production-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: SnackHub-ProductionService
+    ports:
+      - "5432:5432"
+    networks:
+      - snack-hub-network
+    volumes:
+      - snack-hub-production-db:/var/lib/postgresql/data
+
+volumes:
+  snack-hub-production-db:
+
+networks:
+  snack-hub-network:
+    driver: bridge
