@@ -2,6 +2,7 @@ using SnackHub.Production.Application.EventConsumers.Product;
 
 using MassTransit;
 using SnackHub.Production.Api.Configuration;
+using SnackHub.Production.Application.EventConsumers.Order;
 
 namespace SnackHub.Production.Api.Extensions;
 
@@ -17,6 +18,8 @@ public static class MassTransitExtensions
             busConfigurator.AddConsumer<ProductCreatedConsumer>();
             busConfigurator.AddConsumer<ProductUpdatedConsumer>();
             busConfigurator.AddConsumer<ProductDeletedConsumer>();
+
+            busConfigurator.AddConsumer<ProductionOrderCreateConsumer>();
             
             busConfigurator.SetKebabCaseEndpointNameFormatter();
             busConfigurator.UsingRabbitMq((context, configurator) =>
