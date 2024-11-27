@@ -1,4 +1,5 @@
-﻿using DotNet.Testcontainers.Networks;
+﻿using DotNet.Testcontainers.Builders;
+using DotNet.Testcontainers.Networks;
 using Npgsql;
 using Testcontainers.PostgreSql;
 
@@ -6,6 +7,10 @@ namespace SnackHub.Production.Behavior.Tests.Containers;
 
 internal class Postgresql
 {
+    
+    private const int PostgresPublicPort = 5432;
+    private const string PostgresRootPassword = "postgres";
+    
     private PostgreSqlContainer? _postgreSqlContainer = null;
     private readonly INetwork _network;
 
@@ -20,14 +25,16 @@ internal class Postgresql
     public async Task InitializeAsync()
     {
         _postgreSqlContainer = new PostgreSqlBuilder()
-            .WithDatabase("SnackHub-ProductionService")
+            .WithDatabase("SnackHubIntegrationTests")
             .WithUsername("postgres")
-            .WithPassword("postgres")
-            .WithPortBinding(5432)
-            .WithNetwork(_network)
-            .WithNetworkAliases("postgres")
+            .WithPassword(PostgresRootPassword)
+            .WithPortBinding(PostgresPublicPort, true)
+            .WithCleanUp(true)
+            .WithWaitStrategy(Wait
+                .ForUnixContainer()
+                .UntilPortIsAvailable(PostgresPublicPort))
             .Build();
-
+        
         await _postgreSqlContainer!.StartAsync();
 
         var dataSourceBuilder = new NpgsqlDataSourceBuilder
