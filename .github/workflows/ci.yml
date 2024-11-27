@@ -5,7 +5,6 @@ jobs:
     with:
       solution-name: "SnackHub.Production.sln"
       api-project-name: "SnackHub.Production.Api"
-      sonar-project-name: "SnackHub.Production"
       sonar-project-key: "Team-One-Pos-Tech_SnackHub.Production"
     secrets:
       sonar-token: ${{secrets.SONAR_TOKEN}}
