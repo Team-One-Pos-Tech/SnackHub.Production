@@ -1,6 +1,7 @@
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using SnackHub.Production.Application.Contracts;
+using SnackHub.Production.Application.Models.Consumers;
 using SnackHub.Production.Application.Models.Requests;
 using SnackHub.Production.Application.Models.Responses;
 using SnackHub.Production.Domain.Contracts;
@@ -15,7 +16,7 @@ public class UpdateProductionOrderStatus(
     ) : IUpdateProductionOrderStatus
 {
 
-    public async Task<UpdateProductionOrderStatusResponse> Execute(Models.Requests.UpdateStatusRequest orderStatusRequestRequest)
+    public async Task<UpdateProductionOrderStatusResponse> Execute(UpdateStatusRequest orderStatusRequestRequest)
     {
         logger.LogInformation("Updating production order status [{productionOrderId}]", orderStatusRequestRequest.Id);
 
@@ -43,7 +44,7 @@ public class UpdateProductionOrderStatus(
 
     public static bool IsRequestValid(
         ProductionOrder? productionOrder,
-        Models.Requests.UpdateStatusRequest orderStatusRequestRequest,
+        UpdateStatusRequest orderStatusRequestRequest,
         out UpdateProductionOrderStatusResponse response)
     {
         response = new UpdateProductionOrderStatusResponse();

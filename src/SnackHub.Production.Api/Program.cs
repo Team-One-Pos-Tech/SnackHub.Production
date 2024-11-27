@@ -6,7 +6,6 @@ namespace SnackHub.Production.Api
     {
         public static void Main(string[] args)
         {
-
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -32,11 +31,7 @@ namespace SnackHub.Production.Api
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
