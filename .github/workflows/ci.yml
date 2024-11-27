@@ -5,6 +5,9 @@ jobs:
     with:
       solution-name: "SnackHub.Production.sln"
       api-project-name: "SnackHub.Production.Api"
+      sonar-project-key: "Team-One-Pos-Tech_SnackHub.Production"
+    secrets:
+      sonar-token: ${{secrets.SONAR_TOKEN}}
       
   docker-setup:
     needs: build-and-test
