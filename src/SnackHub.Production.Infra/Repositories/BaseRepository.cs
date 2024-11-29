@@ -107,5 +107,6 @@ public class BaseRepository<TModel, TDbContext> : IBaseRepository<TModel>
         //TODO: Move it to a better context {UnitOfWork or Transactions based}
         _logger.LogInformation("Storing context data!");
         await _dbContext.SaveChangesAsync();
+        _dbContext.ChangeTracker.Clear();
     }
 }
