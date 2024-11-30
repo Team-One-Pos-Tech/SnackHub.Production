@@ -2,7 +2,7 @@ services:
   snackhub.production.api:
     image: ${DOCKER_REGISTRY-}snackhubproductionapi
     build:
-      context: .
+      context: ../
       dockerfile: src/SnackHub.Production.Api/Dockerfile
     container_name: snack-hub-production-api
     environment:
@@ -16,7 +16,8 @@ services:
     networks:
       - snack-hub-network
     depends_on:
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:4.0-management
@@ -26,6 +27,11 @@ services:
        - "15672:15672"
     networks:
        - snack-hub-network
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   snack-hub-production-db:
     image: postgres:latest
