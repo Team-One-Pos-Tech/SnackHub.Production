@@ -15,7 +15,7 @@ public class BaseRepository<TModel, TDbContext> : IBaseRepository<TModel>
     where TDbContext : DbContext
 {
     private readonly TDbContext _dbContext;
-    private readonly DbSet<TModel> _dbSet;
+    protected readonly DbSet<TModel> _dbSet;
     private readonly ILogger _logger;
 
     protected HashSet<string> _expandProperties = new();
@@ -68,7 +68,7 @@ public class BaseRepository<TModel, TDbContext> : IBaseRepository<TModel>
             .Where(predicate)
             .ToListAsync();
     }
-
+    
     public async Task<TModel?> FindByPredicateAsync(Expression<Func<TModel, bool>> predicate)
     {
         return await _dbSet
