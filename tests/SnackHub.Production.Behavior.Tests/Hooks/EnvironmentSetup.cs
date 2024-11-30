@@ -51,9 +51,6 @@ public sealed class EnvironmentSetupHooks
 
                 var productionDbContext  = new ProductionDbContext(dbContextOptions);
                 collection.AddSingleton<ProductionDbContext>(_ => productionDbContext);
-                
-                // collection.AddDbContext<ProductionDbContext>(optionsBuilder 
-                //     => optionsBuilder.UseNpgsql(postgresql.ConnectionString));
             });
         });
 
