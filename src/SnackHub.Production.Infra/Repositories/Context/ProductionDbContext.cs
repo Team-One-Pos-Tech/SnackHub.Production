@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SnackHub.Production.Infra.Repositories.Maps;
 
 namespace SnackHub.Production.Infra.Repositories.Context;
 
@@ -14,5 +15,7 @@ public class ProductionDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductionDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfiguration(new ProductionOrderItemMap());
     }
 }
