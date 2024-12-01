@@ -3,9 +3,6 @@ namespace SnackHub.Production.Domain.Base;
 public abstract class Entity<TId> : IEquatable<Entity<TId>>
     where TId : notnull
 {
-    protected Entity()
-    {
-    }
 
     protected Entity(TId id)
     {
