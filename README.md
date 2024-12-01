@@ -13,7 +13,7 @@ More details about SnackHub Project can be found [here](https://github.com/Team-
 
 ### Prerequisites
 
-- .NET 6.0 SDK or later
+- .NET 8.0 SDK or later
 - PostgreSQL
 - Docker
 
