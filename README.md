@@ -7,7 +7,7 @@ SnackHub.Production is a .NET service designed to manage production orders for a
 
 More details about SnackHub Project can be found [here](https://github.com/Team-One-Pos-Tech/SnackHub/wiki)
 
-### The main gateway for the SnackHub project can be found [here](github.com/Team-One-Pos-Tech/SnackHub.ApiGateway)
+### The main gateway for the SnackHub project can be found [here](https://github.com/Team-One-Pos-Tech/SnackHub.ApiGateway)
 
 ## Getting Started
 
